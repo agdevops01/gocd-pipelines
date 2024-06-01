@@ -23,7 +23,6 @@ pipelines:
                         - -l
                       command: ls
                       
-        
        - QA:
             fetch_materials: true
             jobs:
