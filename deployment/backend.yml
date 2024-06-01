@@ -11,8 +11,31 @@ pipelines:
         shallow_clone: true
         auto_update: true
         branch: main
-      stages:
-      - DEV:
+    stages:
+    - DEV:
+        fetch_materials: true
+        jobs:
+          ansible:
+            timeout: 0
+            tasks:
+              - exec:
+                  arguments:
+                    - -l
+                  command: ls
+                      
+    - QA:
+        fetch_materials: true
+        jobs:
+          ansible:
+            timeout: 0
+            tasks:
+              - exec:
+                  arguments:
+                    - -l
+                  command: ls
+                run_if: passed
+       
+    - STAGE:
           fetch_materials: true
           jobs:
             ansible:
@@ -22,8 +45,9 @@ pipelines:
                     arguments:
                       - -l
                     command: ls
-                      
-      - QA:
+                    run_if: passed
+      
+    - PROD:
           fetch_materials: true
           jobs:
             ansible:
@@ -34,27 +58,3 @@ pipelines:
                       - -l
                     command: ls
                   run_if: passed
-       
-      - STAGE:
-            fetch_materials: true
-            jobs:
-              ansible:
-                timeout: 0
-                tasks:
-                  - exec:
-                      arguments:
-                        - -l
-                      command: ls
-                      run_if: passed
-        
-      - PROD:
-            fetch_materials: true
-            jobs:
-              ansible:
-                timeout: 0
-                tasks:
-                  - exec:
-                      arguments:
-                        - -l
-                      command: ls
-                      run_if: passed
