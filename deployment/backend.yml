@@ -46,7 +46,7 @@ pipelines:
                   arguments:
                     - -l
                   command: ls
-                run_if: passed
+                  run_if: passed
        
     - STAGE:
         fetch_materials: true
@@ -83,3 +83,4 @@ pipelines:
                     - role_name=backend
                     - expense.yml
                   command: ansible-playbook
+                  run_if: passed
