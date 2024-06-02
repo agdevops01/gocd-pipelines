@@ -7,7 +7,7 @@ pipelines:
     display_order: -1
     materials:
       git-a66247d:
-        git: https://github.com/agdevops01/expense-ansible
+        git: https://github.com/agdevops01/expense-ansible-roles
         shallow_clone: true
         auto_update: true
         branch: main
