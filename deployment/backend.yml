@@ -22,8 +22,14 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                    - -l
-                  command: ls
+                    - -i
+                    - backend-dev.ankitguptarbr08.online
+                    -  -e
+                    - ansible_user=ec2-user
+                    - -e
+                    - ansible_password=DevOps321
+                    - backend.yml
+                  command: ansible-playbook
                       
     - QA:
         fetch_materials: true
@@ -63,6 +69,11 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                    - -l
-                  command: ls
-                run_if: passed
+                    - -i
+                    - backend-dev.ankitguptarbr08.online
+                    - -e
+                    - ansible_user=ec2-user
+                    - -e
+                    - ansible_password=DevOps321
+                    - backend.yml
+                  command: ansible-playbook
