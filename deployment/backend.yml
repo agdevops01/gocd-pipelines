@@ -24,11 +24,14 @@ pipelines:
                   arguments:
                     - -i
                     - backend-dev.ankitguptarbr08.online
-                    -  -e
+                    - -e
                     - ansible_user=ec2-user
                     - -e
                     - ansible_password=DevOps321
-                    - backend.yml
+                    - -e
+                    - env=dev
+                    - role_name=backend
+                    - expense.yml
                   command: ansible-playbook
                       
     - QA:
@@ -75,5 +78,8 @@ pipelines:
                     - ansible_user=ec2-user
                     - -e
                     - ansible_password=DevOps321
-                    - backend.yml
+                    - -e
+                    - env=prod
+                    - role_name=backend
+                    - expense.yml
                   command: ansible-playbook
