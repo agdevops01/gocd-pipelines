@@ -36,25 +36,25 @@ pipelines:
                 run_if: passed
        
     - STAGE:
-          fetch_materials: true
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    arguments:
-                      - -l
-                    command: ls
-                    run_if: passed
+        fetch_materials: true
+        jobs:
+          ansible:
+            timeout: 0
+            tasks:
+              - exec:
+                  arguments:
+                    - -l
+                  command: ls
+                  run_if: passed
       
     - PROD:
-          fetch_materials: true
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    arguments:
-                      - -l
-                    command: ls
-                  run_if: passed
+        fetch_materials: true
+        jobs:
+          ansible:
+            timeout: 0
+            tasks:
+              - exec:
+                  arguments:
+                    - -l
+                  command: ls
+                run_if: passed
