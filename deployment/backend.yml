@@ -73,7 +73,7 @@ pipelines:
               - exec:
                   arguments:
                     - -i
-                    - backend-dev.ankitguptarbr08.online
+                    - backend-prod.ankitguptarbr08.online
                     - -e
                     - ansible_user=ec2-user
                     - -e
