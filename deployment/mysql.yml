@@ -28,7 +28,7 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                    - run.sh
+                  - run.sh
                   command: bash
                       
     - QA:
@@ -71,6 +71,6 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                    - run.sh
+                  - run.sh
                   command: bash
                   run_if: passed
