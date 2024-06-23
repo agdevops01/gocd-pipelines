@@ -11,78 +11,66 @@ pipelines:
         shallow_clone: true
         auto_update: true
         branch: main
+    secure_variables:
+      SSH_PASSWORD: "AES:+Dry2jMBtJyn+nVVJK0zRA==:Yb4u6zAd/sRstr7+LsO+Xw=="
+    environment_variables:
+      component: frontend
     stages:
-    - DEV:
-        fetch_materials: true
-        approval:
-          type: manual
-        jobs:
-          ansible:
-            timeout: 0
-            tasks:
-              - exec:
-                  arguments:
-                    - -i
-                    - frontend-dev.ankitguptarbr08.online,
-                    - -e
-                    - ansible_user=ec2-user
-                    - -e
-                    - ansible_password=DevOps321
-                    - -e
-                    - env=dev
-                    - -e
-                    - role_name=frontend
-                    - expense.yml
-                  command: ansible-playbook
-                      
-    - QA:
-        fetch_materials: true
-        approval:
-          type: manual
-        jobs:
-          ansible:
-            timeout: 0
-            tasks:
-              - exec:
-                  arguments:
-                    - -l
-                  command: ls
-                  run_if: passed
-       
-    - STAGE:
-        fetch_materials: true
-        approval:
-          type: manual
-        jobs:
-          ansible:
-            timeout: 0
-            tasks:
-              - exec:
-                  arguments:
-                    - -l
-                  command: ls
-                  run_if: passed
+      - DEV:
+          fetch_materials: true
+          environment_variables:
+            env: dev
+          approval:
+            type: manual
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - run.sh
+                    command: bash
       
-    - PROD:
-        fetch_materials: true
-        approval:
-          type: manual
-        jobs:
-          ansible:
-            timeout: 0
-            tasks:
-              - exec:
-                  arguments:
-                    - -i
-                    - frontend-prod.ankitguptarbr08.online,
-                    - -e
-                    - ansible_user=ec2-user
-                    - -e
-                    - ansible_password=${SSH_PASSWORD}
-                    - -e
-                    - env=prod
-                    - -e
-                    - role_name=frontend
-                    - expense.yml
-                  command: ansible-playbook
-                  run_if: passed
+      - QA:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -l
+                    command: ls
+                    run_if: passed
+      
+      - STAGE:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -l
+                    command: ls
+                    run_if: passed
+      
+      - PROD:
+          fetch_materials: true
+          environment_variables:
+            env: prod
+          approval:
+            type: manual
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - run.sh
+                    command: bash
+                    run_if: passed
